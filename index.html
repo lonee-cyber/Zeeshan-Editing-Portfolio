@@ -844,6 +844,185 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+        /* =========================================================
+           HIGH PRIVACY / ANTI-COPY PROTECTION LAYER
+           ONLY ADDED CODE — EXISTING LOGIC ABOVE IS UNTOUCHED
+           ========================================================= */
+
+        (function () {
+            'use strict';
+
+            // BLOCK RIGHT CLICK
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK TEXT SELECTION
+            document.addEventListener('selectstart', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK DRAGGING
+            document.addEventListener('dragstart', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK COPY
+            document.addEventListener('copy', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK CUT
+            document.addEventListener('cut', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK PASTE
+            document.addEventListener('paste', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+
+            // BLOCK COMMON SAVE / SOURCE / DEVTOOLS SHORTCUTS
+            document.addEventListener('keydown', function (e) {
+
+                const key = e.key.toLowerCase();
+                const ctrl = e.ctrlKey || e.metaKey;
+
+                // F12
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // CTRL / CMD SHORTCUTS
+                if (ctrl) {
+
+                    // View Source
+                    if (key === 'u') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    // Save Page
+                    if (key === 's') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    // Copy
+                    if (key === 'c') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    // Cut
+                    if (key === 'x') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    // Select All
+                    if (key === 'a') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+
+                    // Print
+                    if (key === 'p') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                }
+
+                // CTRL + SHIFT + I
+                if (ctrl && e.shiftKey && key === 'i') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // CTRL + SHIFT + J
+                if (ctrl && e.shiftKey && key === 'j') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // CTRL + SHIFT + C
+                if (ctrl && e.shiftKey && key === 'c') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // CTRL + SHIFT + K
+                if (ctrl && e.shiftKey && key === 'k') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+
+
+            // BLOCK MIDDLE MOUSE BUTTON
+            document.addEventListener('auxclick', function (e) {
+                if (e.button === 1) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }, true);
+
+
+            // PROTECTION CSS
+            const protectionStyle = document.createElement('style');
+
+            protectionStyle.textContent = `
+                html, body {
+                    -webkit-user-select: none !important;
+                    -moz-user-select: none !important;
+                    -ms-user-select: none !important;
+                    user-select: none !important;
+                }
+
+                img, video, canvas, svg {
+                    -webkit-user-drag: none !important;
+                    user-drag: none !important;
+                }
+
+                img, video {
+                    -webkit-touch-callout: none !important;
+                }
+            `;
+
+            document.head.appendChild(protectionStyle);
+
+
+            // BASIC CLICKJACKING / IFRAME PROTECTION
+            if (window.top !== window.self) {
+                try {
+                    window.top.location = window.self.location.href;
+                } catch (err) {
+                    document.documentElement.innerHTML = '';
+                }
+            }
+
+        })();
+
     </script>
 </body>
 </html>
