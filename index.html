@@ -61,7 +61,7 @@
             transition: transform 0.15s ease-out;
         }
 
-        /* --- SMOOTH SCROLL REVEAL ANIMATION (0 to 100 Opacity & Slide Up) --- */
+        /* --- SMOOTH SCROLL REVEAL ANIMATION --- */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -144,7 +144,7 @@
             box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
         }
 
-        /* --- HERO SECTION (FULL SCREEN AUTOPLAY BACKGROUND VIDEO ENGINE) --- */
+        /* --- HERO SECTION --- */
         #hero { 
             height: 100vh; 
             width: 100%; 
@@ -160,7 +160,7 @@
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 56.25vw; /* 16:9 aspect ratio cover */
+            height: 56.25vw;
             min-height: 100vh;
             min-width: 177.78vh;
             transform: translate(-50%, -50%);
@@ -242,7 +242,7 @@
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 25px; 
         }
 
@@ -278,7 +278,8 @@
 
         .shorts-box { 
             aspect-ratio: 9/16; 
-            max-width: 360px;
+            width: 100%;
+            max-width: 340px;
             margin: 0 auto;
         }
 
@@ -448,7 +449,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (AUTOPLAY VIDEO ENGINE BACKGROUND) -->
+    <!-- HERO SECTION (AUTOPLAY BACKGROUND VIDEO) -->
     <section id="hero">
         <div id="hero-yt-player"></div>
         <div class="overlay"></div>
@@ -466,7 +467,7 @@
     <!-- HIDDEN BACKGROUND AUDIO CONTAINER -->
     <div id="bg-audio-container" style="display:none"></div>
 
-    <!-- APPROACH / FEATURES -->
+    <!-- APPROACH / RETENTION FRAMEWORK (COMPLETED 6 BOXES GRID) -->
     <section class="section" id="about">
         <div class="section-header reveal">
             <h2>The Retention Framework</h2>
@@ -493,6 +494,18 @@
                 <h3>Secure Workflow</h3>
                 <p>Milestone payments, organized asset delivery via Google Drive, and Discord communications.</p>
             </div>
+            <!-- ADDED CARD 5: AI INTEGRATION -->
+            <div class="card glow-card reveal">
+                <div class="card-icon">🤖</div>
+                <h3>Advanced AI Integration</h3>
+                <p>We leverage cutting-edge AI tools (ElevenLabs, Claude, Midjourney & AI plugins) for rapid asset creation, voice design, and best high-retention output.</p>
+            </div>
+            <!-- ADDED CARD 6: UNCOMPROMISED TOOL SUITE ACCESS -->
+            <div class="card glow-card reveal">
+                <div class="card-icon">🛠️</div>
+                <h3>Uncompromised Tool Access</h3>
+                <p>We have full premium access to major industry tools, stock libraries, and hardware—ensuring zero compromises on final video production quality.</p>
+            </div>
         </div>
     </section>
 
@@ -514,28 +527,35 @@
         </div>
     </section>
 
-    <!-- LONG-FORM PORTFOLIO -->
+    <!-- LONG-FORM PORTFOLIO (EXACTLY 6 VIDEOS) -->
     <section class="section" id="portfolio">
         <div class="section-header reveal">
             <h2>Long-Form Portfolio</h2>
             <p class="subtitle">High-retention editing built for long-form watch time.</p>
         </div>
         <div class="grid">
-            <div class="video-box glow-card reveal"><div class="vid" data-id="IpR9RoSTvfY"></div></div>
+            <div class="video-box glow-card reveal"><div class="vid" data-id="QYve3j6SyeE"></div></div>
+            <div class="video-box glow-card reveal"><div class="vid" data-id="Qif2s65nqAs"></div></div>
+            <div class="video-box glow-card reveal"><div class="vid" data-id="q_X5IJ1uCbw"></div></div>
+            <div class="video-box glow-card reveal"><div class="vid" data-id="emsCSTgWgM4"></div></div>
             <div class="video-box glow-card reveal"><div class="vid" data-id="uhm1k1WJNmA"></div></div>
-            <div class="video-box glow-card reveal"><div class="vid" data-id="OK2lzEEKdas"></div></div>
+            <div class="video-box glow-card reveal"><div class="vid" data-id="IpR9RoSTvfY"></div></div>
         </div>
     </section>
 
-    <!-- SHORTS PORTFOLIO -->
+    <!-- SHORTS PORTFOLIO (EXACTLY 6 VERTICAL SHORTS) -->
     <section class="section" id="shorts" style="padding-top: 0;">
         <div class="section-header reveal">
             <h2>Vertical Shorts & Reels</h2>
             <p class="subtitle">Fast-paced, hook-heavy vertical edits designed to go viral.</p>
         </div>
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="cWjZTDX6G_s"></div></div>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="45EvIlnrlJ0"></div></div>
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="mQFSpqt5Pm4"></div></div>
+            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="yVKvA52bPhw"></div></div>
+            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="cWjZTDX6G_s"></div></div>
+            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="3uAKa-uf6eA"></div></div>
+            <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="td9EVIJysYw"></div></div>
         </div>
     </section>
 
@@ -685,7 +705,7 @@
         </div>
     </section>
 
-    <!-- TOAST -->
+    <!-- TOAST NOTIFICATION -->
     <div id="toast">Email Copied: lonezeeshan9682@gmail.com</div>
 
     <!-- YOUTUBE IFRAME API & JS ENGINE -->
@@ -697,17 +717,20 @@
 
         // --- YOUTUBE ENGINE INIT ---
         function onYouTubeIframeAPIReady() {
+            // HERO BACKGROUND VIDEO (REPLACED WITH td9EVIJysYw)
             heroPlayer = new YT.Player('hero-yt-player', {
-                videoId: '5qw1yNk6Q1k',
-                playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: '5qw1yNk6Q1k' },
+                videoId: 'td9EVIJysYw',
+                playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: 'td9EVIJysYw' },
                 events: { onReady: onHeroReady }
             });
 
+            // HIDDEN BACKGROUND MUSIC ENGINE
             bgAudio = new YT.Player('bg-audio-container', {
                 videoId: 'nZOrhNlbFHc',
                 playerVars: { autoplay: 0, loop: 1, playlist: 'nZOrhNlbFHc' }
             });
 
+            // PORTFOLIO VIDEOS AUTOMATIC PLAYER SETUP
             document.querySelectorAll('.vid').forEach(el => {
                 portfolioPlayers.push(new YT.Player(el, {
                     videoId: el.getAttribute('data-id'),
@@ -721,7 +744,7 @@
             heroPlayer.playVideo();
         }
 
-        // UNLOCK AUDIO ON FIRST USER INTERACTION (CLICK / SCROLL / TOUCH)
+        // UNLOCK SOUND ON FIRST USER ACTION
         function unlockSound() {
             if (userUnlocked) return;
             userUnlocked = true;
@@ -733,7 +756,7 @@
             document.addEventListener(evt, unlockSound, { once: true });
         });
 
-        // AUTO PAUSE / PLAY ENGINE LOGIC
+        // AUTO PAUSE / PLAY AUDIO CONTROL ENGINE
         function onPortfolioChange(e) {
             if (e.data === 1) { // Video Playing
                 bgAudio.pauseVideo();
@@ -760,7 +783,7 @@
             updateAudioContext();
         });
 
-        // --- COPY EMAIL TO CLIPBOARD ---
+        // COPY EMAIL FUNCTION
         function copyEmail() {
             navigator.clipboard.writeText("lonezeeshan9682@gmail.com");
             const t = document.getElementById('toast');
@@ -768,7 +791,7 @@
             setTimeout(() => t.style.display = 'none', 3000);
         }
 
-        // --- CUSTOM CURSOR ANIMATION ---
+        // CUSTOM CURSOR ANIMATION ENGINE
         const dot = document.getElementById('cursor-dot');
         const outline = document.getElementById('cursor-outline');
 
@@ -785,7 +808,7 @@
             }, { duration: 400, fill: "forwards" });
         });
 
-        // --- SCROLL REVEAL ANIMATION (0 to 100 Opacity & Slide Up) ---
+        // SCROLL REVEAL ANIMATION (0 to 100 Opacity & Slide Up)
         const observerOptions = {
             threshold: 0.15
         };
