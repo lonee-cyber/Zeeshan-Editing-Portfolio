@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PROTECTION: Block Right Click & Text Selection -->
+    <style>
+        body {
+            -webkit-user-select: none; /* Chrome, Safari, Opera */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* Internet Explorer/Edge */
+            user-select: none;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZEESHAN | High-Retention & Motion Graphics Editor</title>
@@ -449,7 +458,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (AUTOPLAY BACKGROUND VIDEO REPLACED WITH ryeqLUD0sqM) -->
+    <!-- HERO SECTION -->
     <section id="hero">
         <div id="hero-yt-player"></div>
         <div class="overlay"></div>
@@ -467,7 +476,7 @@
     <!-- HIDDEN BACKGROUND AUDIO CONTAINER -->
     <div id="bg-audio-container" style="display:none"></div>
 
-    <!-- APPROACH / RETENTION FRAMEWORK (COMPLETED 6 BOXES GRID) -->
+    <!-- APPROACH -->
     <section class="section" id="about">
         <div class="section-header reveal">
             <h2>The Retention Framework</h2>
@@ -494,13 +503,11 @@
                 <h3>Secure Workflow</h3>
                 <p>Milestone payments, organized asset delivery via Google Drive, and Discord communications.</p>
             </div>
-            <!-- CARD 5: AI INTEGRATION -->
             <div class="card glow-card reveal">
                 <div class="card-icon">🤖</div>
                 <h3>AI-Powered Execution</h3>
                 <p>We leverage cutting-edge AI tools like ElevenLabs, Claude, Nano Banana Pro & Midjourney for ultra-fast workflows and high-retention outputs.</p>
             </div>
-            <!-- CARD 6: UNCOMPROMISED TOOL ACCESS -->
             <div class="card glow-card reveal">
                 <div class="card-icon">🛠️</div>
                 <h3>Premium Tool Ecosystem</h3>
@@ -527,7 +534,7 @@
         </div>
     </section>
 
-    <!-- LONG-FORM PORTFOLIO (6 VIDEOS) -->
+    <!-- LONG-FORM PORTFOLIO -->
     <section class="section" id="portfolio">
         <div class="section-header reveal">
             <h2>Long-Form Portfolio</h2>
@@ -543,7 +550,7 @@
         </div>
     </section>
 
-    <!-- SHORTS PORTFOLIO (6 VERTICAL SHORTS) -->
+    <!-- SHORTS PORTFOLIO -->
     <section class="section" id="shorts" style="padding-top: 0;">
         <div class="section-header reveal">
             <h2>Vertical Shorts & Reels</h2>
@@ -559,7 +566,7 @@
         </div>
     </section>
 
-    <!-- REVIEWS SECTION -->
+    <!-- REVIEWS -->
     <section class="section" id="reviews">
         <div class="section-header reveal">
             <h2>Client Testimonials</h2>
@@ -578,7 +585,6 @@
                     <p>"Zeeshan's pacing and clean motion graphics brought a fresh, high-retention energy to our complex health & nutrition videos. Watch time clicked up instantly."</p>
                 </div>
             </div>
-
             <div class="review-card glow-card reveal">
                 <div>
                     <div class="client-header">
@@ -591,7 +597,6 @@
                     <p>"Insane After Effects visual hooks! The dark aesthetics and 2D/3D typography kept our self-improvement audience glued till the last frame."</p>
                 </div>
             </div>
-
             <div class="review-card glow-card reveal">
                 <div>
                     <div class="client-header">
@@ -604,7 +609,6 @@
                     <p>"Sound design and color grading are next level. He takes raw commentary and elevates it into a cinema-style story."</p>
                 </div>
             </div>
-
             <div class="review-card glow-card reveal">
                 <div>
                     <div class="client-header">
@@ -620,7 +624,7 @@
         </div>
     </section>
 
-    <!-- PRICING SECTION -->
+    <!-- PRICING -->
     <section class="section" id="pricing">
         <div class="section-header reveal">
             <h2>Flexible Pricing Packages</h2>
@@ -642,7 +646,6 @@
                 </div>
                 <a href="#contact" class="glow-card" style="padding: 12px; text-align: center; text-decoration: none; color: #fff; display: block;">Select Starter</a>
             </div>
-
             <div class="price-card glow-card popular reveal">
                 <div class="tag-popular">Most Popular</div>
                 <div>
@@ -659,7 +662,6 @@
                 </div>
                 <a href="#contact" class="btn-cta" style="padding: 12px; text-align: center; text-decoration: none; display: block;">Get Started Now</a>
             </div>
-
             <div class="price-card glow-card reveal">
                 <div>
                     <h3>Shorts / Reels Bundle</h3>
@@ -678,7 +680,7 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <!-- CONTACT -->
     <section class="section" id="contact">
         <div class="section-header reveal">
             <h2>Get In Touch</h2>
@@ -690,13 +692,11 @@
                 <h3>WhatsApp</h3>
                 <p>+91 96825 15246</p>
             </a>
-
             <div class="contact-card glow-card reveal" onclick="copyEmail()" style="cursor: pointer;">
                 <div class="card-icon">✉️</div>
                 <h3>Email</h3>
                 <p>lonezeeshan9682@gmail.com</p>
             </div>
-
             <div class="contact-card glow-card reveal">
                 <div class="card-icon">👾</div>
                 <h3>Discord</h3>
@@ -705,32 +705,34 @@
         </div>
     </section>
 
-    <!-- TOAST NOTIFICATION -->
+    <!-- TOAST -->
     <div id="toast">Email Copied: lonezeeshan9682@gmail.com</div>
 
-    <!-- YOUTUBE IFRAME API & ADVANCED AUDIO LOGIC -->
+    <!-- PROTECTION SCRIPT & YOUTUBE ENGINE -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // --- PROTECTION: BLOCK INSPECT/VIEW SOURCE ---
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+            }
+        });
+
         let heroPlayer, bgAudio, portfolioPlayers = [];
         let isStarted = false;
         let userUnlocked = false;
 
-        // --- YOUTUBE ENGINE INIT ---
         function onYouTubeIframeAPIReady() {
-            // HERO BACKGROUND VIDEO (REPLACED WITH ryeqLUD0sqM)
             heroPlayer = new YT.Player('hero-yt-player', {
                 videoId: 'ryeqLUD0sqM',
                 playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: 'ryeqLUD0sqM' },
                 events: { onReady: onHeroReady }
             });
-
-            // HIDDEN BACKGROUND MUSIC ENGINE
             bgAudio = new YT.Player('bg-audio-container', {
                 videoId: 'nZOrhNlbFHc',
                 playerVars: { autoplay: 0, loop: 1, playlist: 'nZOrhNlbFHc' }
             });
-
-            // PORTFOLIO VIDEOS AUTOMATIC PLAYER SETUP
             document.querySelectorAll('.vid').forEach(el => {
                 portfolioPlayers.push(new YT.Player(el, {
                     videoId: el.getAttribute('data-id'),
@@ -744,7 +746,6 @@
             heroPlayer.playVideo();
         }
 
-        // UNLOCK AUDIO ON FIRST USER INTERACTION
         function unlockSound() {
             if (userUnlocked) return;
             userUnlocked = true;
@@ -756,45 +757,32 @@
             document.addEventListener(evt, unlockSound, { once: true });
         });
 
-        // HELPER: CHECK IF ANY PORTFOLIO VIDEO IS CURRENTLY PLAYING
         function checkIsAnyPortfolioVideoPlaying() {
             return portfolioPlayers.some(player => {
-                try {
-                    return player.getPlayerState() === YT.PlayerState.PLAYING;
-                } catch(e) {
-                    return false;
-                }
+                try { return player.getPlayerState() === YT.PlayerState.PLAYING; } catch(e) { return false; }
             });
         }
 
-        // SMART AUDIO ENGINE: IF ANY VIDEO IS PLAYING, BG MUSIC MUST STAY PAUSED
         function onPortfolioChange(e) {
             const isPlaying = checkIsAnyPortfolioVideoPlaying();
-
             if (isPlaying) {
-                // Video chal rahi hai -> BG music pause rahega aur hero mute rahega
                 if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
                 if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
             } else {
-                // Koi video nahi chal rahi -> normal audio rules apply honge
                 updateAudioContext();
             }
         }
 
         function updateAudioContext() {
-            // Agar koi portfolio video chal rahi hai to scroll karne par bhi BG music bilkul NAHI chalega
             if (checkIsAnyPortfolioVideoPlaying()) {
                 if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
                 return;
             }
-
             const heroRect = document.getElementById('hero').getBoundingClientRect();
             if (heroRect.bottom < 0) {
-                // Hero section ke bahar aur koi video nahi chal rahi -> BG music chalega
                 if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
                 if (userUnlocked && bgAudio && bgAudio.playVideo) bgAudio.playVideo();
             } else if (userUnlocked) {
-                // Hero section me -> Hero video ki audio chalegi, BG music pause rahega
                 if (heroPlayer && heroPlayer.unMute) heroPlayer.unMute();
                 if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
             }
@@ -805,7 +793,6 @@
             updateAudioContext();
         });
 
-        // COPY EMAIL FUNCTION
         function copyEmail() {
             navigator.clipboard.writeText("lonezeeshan9682@gmail.com");
             const t = document.getElementById('toast');
@@ -813,216 +800,22 @@
             setTimeout(() => t.style.display = 'none', 3000);
         }
 
-        // CUSTOM CURSOR ANIMATION ENGINE
         const dot = document.getElementById('cursor-dot');
         const outline = document.getElementById('cursor-outline');
-
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
-
             dot.style.left = `${posX}px`;
             dot.style.top = `${posY}px`;
-
-            outline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 400, fill: "forwards" });
+            outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 400, fill: "forwards" });
         });
-
-        // SCROLL REVEAL ANIMATION (0 to 100 Opacity & Slide Up)
-        const observerOptions = {
-            threshold: 0.15
-        };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, observerOptions);
-
+        }, { threshold: 0.15 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-
-        /* =========================================================
-           HIGH PRIVACY / ANTI-COPY PROTECTION LAYER
-           ONLY ADDED CODE — EXISTING LOGIC ABOVE IS UNTOUCHED
-           ========================================================= */
-
-        (function () {
-            'use strict';
-
-            // BLOCK RIGHT CLICK
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK TEXT SELECTION
-            document.addEventListener('selectstart', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK DRAGGING
-            document.addEventListener('dragstart', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK COPY
-            document.addEventListener('copy', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK CUT
-            document.addEventListener('cut', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK PASTE
-            document.addEventListener('paste', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }, true);
-
-            // BLOCK COMMON SAVE / SOURCE / DEVTOOLS SHORTCUTS
-            document.addEventListener('keydown', function (e) {
-
-                const key = e.key.toLowerCase();
-                const ctrl = e.ctrlKey || e.metaKey;
-
-                // F12
-                if (e.key === 'F12') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-
-                // CTRL / CMD SHORTCUTS
-                if (ctrl) {
-
-                    // View Source
-                    if (key === 'u') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-
-                    // Save Page
-                    if (key === 's') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-
-                    // Copy
-                    if (key === 'c') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-
-                    // Cut
-                    if (key === 'x') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-
-                    // Select All
-                    if (key === 'a') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-
-                    // Print
-                    if (key === 'p') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-                }
-
-                // CTRL + SHIFT + I
-                if (ctrl && e.shiftKey && key === 'i') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-
-                // CTRL + SHIFT + J
-                if (ctrl && e.shiftKey && key === 'j') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-
-                // CTRL + SHIFT + C
-                if (ctrl && e.shiftKey && key === 'c') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-
-                // CTRL + SHIFT + K
-                if (ctrl && e.shiftKey && key === 'k') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
-                }
-            }, true);
-
-
-            // BLOCK MIDDLE MOUSE BUTTON
-            document.addEventListener('auxclick', function (e) {
-                if (e.button === 1) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            }, true);
-
-
-            // PROTECTION CSS
-            const protectionStyle = document.createElement('style');
-
-            protectionStyle.textContent = `
-                html, body {
-                    -webkit-user-select: none !important;
-                    -moz-user-select: none !important;
-                    -ms-user-select: none !important;
-                    user-select: none !important;
-                }
-
-                img, video, canvas, svg {
-                    -webkit-user-drag: none !important;
-                    user-drag: none !important;
-                }
-
-                img, video {
-                    -webkit-touch-callout: none !important;
-                }
-            `;
-
-            document.head.appendChild(protectionStyle);
-
-
-            // BASIC CLICKJACKING / IFRAME PROTECTION
-            if (window.top !== window.self) {
-                try {
-                    window.top.location = window.self.location.href;
-                } catch (err) {
-                    document.documentElement.innerHTML = '';
-                }
-            }
-
-        })();
-
     </script>
 </body>
 </html>
