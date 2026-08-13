@@ -3,485 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeeshan | Video Editor & Content Creator</title>
+    <title>Zeeshan | Professional Video Editor</title>
     <style>
-        /* Apple Ultra-Minimal Dark System Design */
-        :root {
-            --bg-main: #000000;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
-            --border: rgba(255, 255, 255, 0.12);
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-            --accent-blue: #2997ff;
-            --accent-glow: rgba(41, 151, 255, 0.2);
+        /* APPLE FONTS & GLOBAL STYLES */
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: local('SF Pro Display'), local('Helvetica Neue'), local('Arial');
         }
-
+        :root {
+            --glass-bg: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
             scroll-behavior: smooth;
         }
-
         body {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
+            background-color: #050505;
+            color: #ffffff;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Glassmorphism Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
+        /* GLASSMORPHISM NAVBAR */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%;
+        }
+        nav .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+        nav .nav-links { display: flex; gap: 30px; }
+        nav .nav-links a {
+            color: #ccc; text-decoration: none; font-size: 14px;
+            transition: color 0.3s;
+        }
+        nav .nav-links a:hover { color: #fff; }
+        
+        /* MOBILE MENU TOGGLE */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 25px; height: 2px; background: white; transition: 0.3s; }
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute; top: 60px; right: 0; background: var(--glass-bg);
+                backdrop-filter: blur(30px); width: 100%; flex-direction: column;
+                padding: 20px 0; text-align: center; border-bottom: 1px solid var(--glass-border);
+                display: none;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
         }
 
-        .logo {
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            color: var(--text-primary);
+        /* HERO SECTION WITH CLEAN YOUTUBE BACKGROUND */
+        .hero {
+            position: relative; height: 100vh; width: 100vw;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; text-align: center; z-index: 1;
         }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 18px;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Base Section Layout */
-        section {
-            min-height: 100vh;
-            padding: 120px 8% 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            z-index: 2;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-tag {
-            color: var(--accent-blue);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* HERO SECTION WITH CLEAN YOUTUBE BACKGROUND VIDEO */
-        #hero {
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
         .hero-video-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none; /* Click disable karne ke liye */
-            z-index: 0;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw; height: 56.25vw;
+            min-height: 100vh; min-width: 177.77vh;
+            z-index: -2; pointer-events: none; /* Disables clicking on video */
         }
-
         .hero-video-wrapper iframe {
-            width: 300vw;
-            height: 300vh;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            /* Scale 1.35 YouTube logos/titles ko screen border ke bahar push kar deta hai */
-            transform: translate(-50%, -50%) scale(1.35);
-            pointer-events: none;
-            opacity: 0.35; /* Dark background look */
-            filter: saturate(1.2) contrast(1.1);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; transform: scale(1.3); /* Hides YT branding & controls */
         }
-
         .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, transparent 10%, rgba(0,0,0,0.85) 85%);
-            z-index: 1;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(5,5,5,1) 100%);
+            z-index: -1;
         }
+        
+        .hero-content { z-index: 10; max-width: 800px; padding: 20px; }
+        .hero-content h1 { font-size: 5vw; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.2rem; color: #bbb; margin-bottom: 30px; }
 
-        #hero h1 {
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1.08;
-            margin-bottom: 18px;
-            background: linear-gradient(180deg, #ffffff 30%, #a1a1a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* SOUND ENABLE BUTTON (Apple Style) */
+        .btn-glass {
+            padding: 12px 30px; border-radius: 30px; border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            color: white; font-size: 16px; cursor: pointer; transition: 0.3s;
+            box-shadow: var(--glow); margin-bottom: 10px;
         }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
 
-        #hero p {
-            font-size: clamp(1rem, 2vw, 1.35rem);
-            color: var(--text-secondary);
-            max-width: 650px;
-            margin: 0 auto 30px;
+        /* SECTIONS & GRIDS */
+        .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; text-align: center; }
+        
+        .grid { display: grid; gap: 30px; }
+        .grid-long { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        .grid-shorts { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        
+        .video-card {
+            border-radius: 20px; overflow: hidden; position: relative;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            transition: 0.4s ease;
         }
+        .video-card:hover { transform: translateY(-10px); box-shadow: var(--glow); border-color: rgba(255,255,255,0.4); }
+        .video-card iframe { width: 100%; border: none; }
+        
+        /* 16:9 and 9:16 AR */
+        .ratio-16-9 iframe { aspect-ratio: 16/9; }
+        .ratio-9-16 iframe { aspect-ratio: 9/16; }
 
-        /* SOCIAL MEDIA BUTTONS */
-        .social-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 25px;
-            z-index: 2;
+        /* SKILLS & SOCIALS */
+        .skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .skill-tag {
+            padding: 10px 20px; border-radius: 30px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px); color: #ddd; font-weight: 500;
         }
+        
+        .socials { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .socials a, .socials button {
+            text-decoration: none; color: white; background: rgba(255,255,255,0.05);
+            padding: 15px 30px; border-radius: 12px; border: 1px solid var(--glass-border);
+            transition: 0.3s; cursor: pointer; font-size: 16px;
+        }
+        .socials a:hover, .socials button:hover { background: rgba(255,255,255,0.2); }
 
-        .social-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 10px 22px;
-            border-radius: 980px;
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        /* EMAIL COPY TOAST */
+        #toast {
+            visibility: hidden; min-width: 250px; background-color: rgba(255,255,255,0.9);
+            color: #000; text-align: center; border-radius: 10px; padding: 16px;
+            position: fixed; z-index: 10000; left: 50%; bottom: 30px;
+            transform: translateX(-50%); font-weight: 600; font-size: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+            opacity: 0; transition: opacity 0.5s, visibility 0.5s;
         }
+        #toast.show { visibility: visible; opacity: 1; }
 
-        .social-btn:hover {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(41, 151, 255, 0.3);
-        }
-
-        /* VIDEO EMBEDS FOR SHOWCASE */
-        .video-box-16-9 {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #000;
-            border: 1px solid var(--border);
-        }
-
-        .video-box-9-16 {
-            position: relative;
-            padding-bottom: 177.77%;
-            height: 0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #000;
-            border: 1px solid var(--border);
-        }
-
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* GRIDS & CARDS */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .grid-3-shorts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255, 255, 255, 0.3);
-            background: var(--bg-card-hover);
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            margin-top: 14px;
-            margin-bottom: 6px;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.88rem;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .skill-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 40px 8%;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-        }
+        /* HIDDEN BG MUSIC PLAYER */
+        #bg-music-player { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; z-index: -100; }
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--glass-border); margin-top: 50px; color: #777;}
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header>
-        <div class="logo">ZEESHAN</div>
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#showreel">Reel</a></li>
-                <li><a href="#shorts">Shorts</a></li>
-                <li><a href="#longform">Long Form</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Hidden Background Audio Player (20% Volume) -->
+    <div id="bg-music-player"></div>
 
-    <!-- SECTION 1: HERO (CLEAN YOUTUBE VIDEO BACKGROUND) -->
-    <section id="hero">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">ZEESHAN.</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#hero" onclick="toggleMenu()">Home</a>
+            <a href="#long-form" onclick="toggleMenu()">Long Form</a>
+            <a href="#shorts" onclick="toggleMenu()">Shorts / Reels</a>
+            <a href="#workflow" onclick="toggleMenu()">Workflow</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
         <div class="hero-video-wrapper">
-            <!-- 
-               IMPORTANT: 
-               Niche wale iframe src link mein 'dQw4w9WgXcQ' ki jagah apni YouTube video ID daal do.
-               Dono jagah 'embed/YOUR_ID' aur 'playlist=YOUR_ID' badalna zaroori hai loop ke liye.
-            -->
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&enablejsapi=1&disablekb=1&modestbranding=1" 
-                    allow="autoplay; encrypted-media"></iframe>
+            <div id="hero-yt-player"></div>
         </div>
         <div class="hero-overlay"></div>
-
-        <div class="reveal">
-            <span class="section-tag">Video Editor & Visual Storyteller</span>
-            <h1>High-Retention Edits.<br>Cinematic Precision.</h1>
-            <p>Crafting high-converting short-form hooks, dark psychology narrative edits, and polished long-form videos designed for peak retention.</p>
+        
+        <div class="hero-content">
+            <h1>Crafting Cinematic Stories.</h1>
+            <p>Advanced Video Editing | Retention Optimization | 50M+ Views Strategy</p>
             
-            <!-- SOCIAL MEDIA REDIRECT BUTTONS -->
-            <div class="social-container">
-                <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" class="social-btn">
-                    LinkedIn ↗
-                </a>
-                <a href="https://www.instagram.com/YOUR_INSTAGRAM_HANDLE" target="_blank" class="social-btn">
-                    Instagram ↗
-                </a>
-                <a href="https://www.youtube.com/@YOUR_YOUTUBE_CHANNEL" target="_blank" class="social-btn">
-                    YouTube ↗
-                </a>
-                <a href="https://wa.me/91YOUR_PHONE_NUMBER" target="_blank" class="social-btn">
-                    WhatsApp ↗
-                </a>
-                <a href="https://discord.gg/YOUR_DISCORD_INVITE" target="_blank" class="social-btn">
-                    Discord ↗
-                </a>
-            </div>
+            <button class="btn-glass" id="sound-toggle" onclick="enableSound()">Tap to Enable Smart Audio 🔊</button>
+            <div id="sound-status" style="font-size: 13px; color: #22c55e; margin-top: 10px; transition: 0.5s; opacity: 0;">Audio Active</div>
         </div>
     </section>
 
-    <!-- SECTION 2: SHOWREEL -->
-    <section id="showreel">
-        <div class="reveal">
-            <span class="section-tag">01 / Showreel</span>
-            <h2 class="section-title">2026 Editing Reel</h2>
-            <div class="video-box-16-9">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1" allowfullscreen></iframe>
-            </div>
+    <!-- 16:9 Long Form Videos -->
+    <section class="section" id="long-form">
+        <h2 class="section-title">Long-Form Masterpieces</h2>
+        <div class="grid grid-long">
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/IpR9RoSTvfY?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/uhm1k1WJNmA?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/OK2lzEEKdas?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KIvWwlHQDQQ?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ptol3pxJsIc?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/emsCSTgWgM4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
         </div>
     </section>
 
-    <!-- SECTION 3: SHORTS GRID (9:16 Vertical) -->
-    <section id="shorts">
-        <div class="reveal">
-            <span class="section-tag">02 / Viral Shorts</span>
-            <h2 class="section-title">Reels & TikToks</h2>
-            <div class="grid-3-shorts">
-                <div class="card">
-                    <div class="video-box-9-16">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <h3>Dark Psychology Hook</h3>
-                    <p>Dynamic captions & sound design pacing.</p>
-                </div>
-                <div class="card">
-                    <div class="video-box-9-16">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <h3>Tech Explainer Reel</h3>
-                    <p>Clean motion graphics & tracking.</p>
-                </div>
-                <div class="card">
-                    <div class="video-box-9-16">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <h3>Cinematic Storytelling</h3>
-                    <p>Color grading & sound design.</p>
-                </div>
-            </div>
+    <!-- 9:16 Shorts / Reels -->
+    <section class="section" id="shorts">
+        <h2 class="section-title">High-Retention Shorts</h2>
+        <div class="grid grid-shorts">
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/cWjZTDX6G_s?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/mQFSpqt5Pm4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ekXVqUo0lh4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KKeugeOYPMY?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/yVKvA52bPhw?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/45EvIlnrlJ0?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
         </div>
     </section>
 
-    <!-- SECTION 4: LONG FORM (16:9 Horizontal) -->
-    <section id="longform">
-        <div class="reveal">
-            <span class="section-tag">03 / Long-Form YouTube</span>
-            <h2 class="section-title">Documentaries & Promos</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <div class="video-box-16-9">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <h3>Cinematic Documentary Edit</h3>
-                    <p>Custom pacing and immersive audio landscape.</p>
-                </div>
-                <div class="card">
-                    <div class="video-box-16-9">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <h3>High-Paced Commercial Promo</h3>
-                    <p>Speed ramps, transitions, and typography.</p>
-                </div>
-            </div>
+    <!-- Workflow & Skills -->
+    <section class="section" id="workflow">
+        <h2 class="section-title">Software & Skills</h2>
+        <div class="skills-container">
+            <div class="skill-tag">DaVinci Resolve Studio</div>
+            <div class="skill-tag">Fusion & Keyframes</div>
+            <div class="skill-tag">ElevenLabs AI</div>
+            <div class="skill-tag">Color Grading</div>
+            <div class="skill-tag">Sound Design</div>
+            <div class="skill-tag">Dark Psychology Hooks</div>
+            <div class="skill-tag">YouTube SEO</div>
         </div>
     </section>
 
-    <!-- SECTION 5: SKILLS -->
-    <section id="skills">
-        <div class="reveal">
-            <span class="section-tag">04 / Capabilities</span>
-            <h2 class="section-title">Technical Toolkit</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <h4>DaVinci Resolve Studio</h4>
-                    <p>Advanced timeline editing & Fusion VFX.</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Sound Design & Audio</h4>
-                    <p>Custom Foley effects & EQ balancing.</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Color Grading</h4>
-                    <p>Cinematic LUT matching & moody grades.</p>
-                </div>
-                <div class="skill-item">
-                    <h4>Motion Graphics</h4>
-                    <p>Lower thirds & dynamic kinetic text.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6: CONTACT & SOCIALS -->
-    <section id="contact" style="text-align: center; align-items: center;">
-        <div class="reveal">
-            <span class="section-tag">05 / Get In Touch</span>
-            <h2 class="section-title">Let's Connect & Build</h2>
-            <p style="color: var(--text-secondary); max-width: 500px; margin-bottom: 25px;">
-                Available for freelance video editing, channel optimization, and long-term editing roles.
-            </p>
-            <a href="mailto:your-email@gmail.com" class="social-btn" style="background: var(--accent-blue); padding: 14px 32px; font-size: 1rem;">
-                Email Me Directly ↗
-            </a>
+    <!-- Socials & Contact -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Let's Work Together</h2>
+        <div class="socials">
+            <!-- REPLACE WITH YOUR ACTUAL LINKS -->
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">YouTube</a>
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">Discord</a>
+            <a href="#" target="_blank">WhatsApp</a>
+            <button onclick="copyEmail()">Copy Email ✉️</button>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 Zeeshan. All rights reserved.</p>
+        <p>&copy; 2026 Zeeshan. All rights reserved.</p>
     </footer>
 
-    <!-- Smooth Scroll Reveal Script -->
+    <!-- Email Copy Toast Notification -->
+    <div id="toast">✅ Email Copied to Clipboard!</div>
+
+    <!-- MAIN JAVASCRIPT: UI & YOUTUBE API LOGIC -->
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        // 1. Mobile Menu Toggle
+        function toggleMenu() {
+            if (window.innerWidth <= 768) {
+                document.getElementById("navLinks").classList.toggle("active");
+            }
+        }
+
+        // 2. Email Copy to Clipboard Toast
+        function copyEmail() {
+            const myEmail = "your.email@example.com"; // <--- APNI EMAIL YAHAN DAALO
+            navigator.clipboard.writeText(myEmail).then(() => {
+                let toast = document.getElementById("toast");
+                toast.classList.add("show");
+                setTimeout(() => { toast.classList.remove("show"); }, 3000);
+            });
+        }
+
+        // ==========================================
+        // 3. YOUTUBE SMART AUDIO ENGINE LOGIC
+        // ==========================================
+        var heroPlayer;
+        var bgMusicPlayer;
+        var portfolioPlayers = [];
+        var isSoundEnabledByUser = false;
+        var activePortfolioVideos = 0;
+
+        // Load YouTube IFrame API asynchronous
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            // A. Hero Loop Player (Volume 100)
+            heroPlayer = new YT.Player('hero-yt-player', {
+                videoId: '5qw1yNk6Q1k',
+                playerVars: {
+                    'autoplay': 1, 'controls': 0, 'showinfo': 0, 'rel': 0,
+                    'mute': 1, 'loop': 1, 'playlist': '5qw1yNk6Q1k',
+                    'playsinline': 1, 'enablejsapi': 1, 'modestbranding': 1, 'disablekb': 1
+                },
+                events: {
+                    'onReady': function(e) { e.target.setVolume(100); e.target.playVideo(); }
                 }
             });
-        }, { threshold: 0.15 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            // B. Background Music Player (Volume 20)
+            bgMusicPlayer = new YT.Player('bg-music-player', {
+                videoId: 'nZOrhNlbFHc',
+                playerVars: {
+                    'autoplay': 1, 'controls': 0, 'rel': 0, 'showinfo': 0,
+                    'loop': 1, 'playlist': 'nZOrhNlbFHc',
+                    'playsinline': 1, 'enablejsapi': 1
+                },
+                events: {
+                    'onReady': function(e) {
+                        e.target.setVolume(20);
+                        e.target.mute(); // Kept muted till user clicks "Enable Audio"
+                        e.target.playVideo();
+                    }
+                }
+            });
+
+            // C. Setup Tracking for All Portfolio Videos
+            var iframes = document.querySelectorAll('.portfolio-iframe');
+            iframes.forEach(function(iframe) {
+                var pPlayer = new YT.Player(iframe, {
+                    events: { 'onStateChange': onPortfolioStateChange }
+                });
+                portfolioPlayers.push(pPlayer);
+                portfolioObserver.observe(iframe); // Observe for scrolling away
+            });
+        }
+
+        // User Clicks Button to Enable Master Audio
+        function enableSound() {
+            isSoundEnabledByUser = true;
+            if(heroPlayer) heroPlayer.unMute();
+            if(bgMusicPlayer) bgMusicPlayer.unMute();
+
+            document.getElementById('sound-toggle').style.display = 'none';
+            let status = document.getElementById('sound-status');
+            status.style.opacity = '1';
+            setTimeout(() => { status.style.opacity = '0'; }, 3000);
+        }
+
+        // Logic: Pause BG Music when ANY Portfolio Video is PLAYING
+        function onPortfolioStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                activePortfolioVideos++;
+                if (bgMusicPlayer && typeof bgMusicPlayer.pauseVideo === 'function') bgMusicPlayer.pauseVideo();
+                if (heroPlayer && typeof heroPlayer.mute === 'function') heroPlayer.mute();
+            } 
+            else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                activePortfolioVideos = Math.max(0, activePortfolioVideos - 1);
+                
+                // If NO portfolio videos are playing, resume BG Music
+                if (activePortfolioVideos === 0 && isSoundEnabledByUser) {
+                    if (bgMusicPlayer && typeof bgMusicPlayer.playVideo === 'function') bgMusicPlayer.playVideo();
+                }
+            }
+        }
+
+        // Logic: Auto-pause portfolio videos if user scrolls past them
+        const portfolioObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    let iframe = entry.target;
+                    let player = portfolioPlayers.find(p => p.getIframe() === iframe);
+                    if (player && typeof player.pauseVideo === 'function' && typeof player.getPlayerState === 'function') {
+                        if(player.getPlayerState() === YT.PlayerState.PLAYING) {
+                            player.pauseVideo(); // This triggers onPortfolioStateChange & resumes BG music automatically!
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Logic: Mute Hero Video audio when scrolled away from Hero section
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!heroPlayer || typeof heroPlayer.mute !== 'function') return;
+                
+                if (entry.isIntersecting) {
+                    // Scrolled back up to hero
+                    if (isSoundEnabledByUser && activePortfolioVideos === 0) {
+                        heroPlayer.unMute();
+                    }
+                } else {
+                    // Scrolled down away from hero
+                    heroPlayer.mute();
+                }
+            });
+        }, { threshold: 0.3 }); // Mutes when 70% of hero is out of screen
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const heroSection = document.getElementById('hero');
+            if(heroSection) heroObserver.observe(heroSection);
+        });
     </script>
 </body>
 </html>
