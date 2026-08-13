@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Editor & Creator | Portfolio</title>
+    <style>
+        /* Apple-Inspired Minimalist Dark Theme */
+        :root {
+            --bg-color: #000000;
+            --card-bg: #121215;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --accent: #2997ff;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.03);
+            background-color: #0077ed;
+        }
+
+        /* Portfolio Section */
+        .section-title {
+            padding: 60px 8% 20px;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            padding: 0 8% 80px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-info p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <nav>
+        <div class="logo">PORTFOLIO</div>
+        <ul>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Visual Storytelling & High-Retention Edits</h1>
+        <p>Crafting cinematic long-form content, high-converting shorts, and advanced visual effects.</p>
+        <a href="#work" class="btn-primary">View Featured Projects</a>
+    </section>
+
+    <!-- Portfolio Section -->
+    <div id="work" class="section-title">Selected Works</div>
+    <section class="portfolio-grid">
+
+        <!-- Project 1 -->
+        <div class="card">
+            <div class="video-container">
+                <!-- YouTube Unlisted video ka Embed Link yahan paste karo -->
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="card-info">
+                <h3>Cinematic Dark Psychology Reel</h3>
+                <p>High-retention editing, sound design, and custom typography animation.</p>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="card-info">
+                <h3>Commercial Tech Promo</h3>
+                <p>Smooth color grading, fast-paced pacing, and 3D mockups integration.</p>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="card">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <div class="card-info">
+                <h3>Short-Form Viral Edit</h3>
+                <p>Optimized for TikTok/Shorts hooks, custom captions, and dynamic sound effects.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <p>© 2026 Your Name. All rights reserved.</p>
+        <p style="margin-top: 8px;">Contact: <a href="mailto:your-email@gmail.com" style="color: var(--accent); text-decoration: none;">your-email@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>
