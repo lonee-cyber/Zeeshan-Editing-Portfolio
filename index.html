@@ -5,384 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zeeshan | Professional Video Editor</title>
     <style>
-        /* APPLE FONTS & GLOBAL STYLES */
-        @font-face {
-            font-family: 'SF Pro Display';
-            src: local('SF Pro Display'), local('Helvetica Neue'), local('Arial');
-        }
-        :root {
-            --glass-bg: rgba(20, 20, 20, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glow: 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-            scroll-behavior: smooth;
-        }
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* GLASSMORPHISM NAVBAR */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--glass-border);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 5%;
-        }
+        @font-face { font-family: 'SF Pro Display'; src: local('Helvetica Neue'), local('Arial'); }
+        :root { --glass-bg: rgba(20, 20, 20, 0.4); --glass-border: rgba(255, 255, 255, 0.15); --glow: 0 0 20px rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; scroll-behavior: smooth; }
+        body { background-color: #050505; color: #ffffff; overflow-x: hidden; }
+        
+        /* Navbar */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
         nav .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
-        nav .nav-links { display: flex; gap: 30px; }
-        nav .nav-links a {
-            color: #ccc; text-decoration: none; font-size: 14px;
-            transition: color 0.3s;
-        }
-        nav .nav-links a:hover { color: #fff; }
-        
-        /* MOBILE MENU TOGGLE */
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #ccc; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger span { width: 25px; height: 2px; background: white; transition: 0.3s; }
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute; top: 60px; right: 0; background: var(--glass-bg);
-                backdrop-filter: blur(30px); width: 100%; flex-direction: column;
-                padding: 20px 0; text-align: center; border-bottom: 1px solid var(--glass-border);
-                display: none;
-            }
-            .nav-links.active { display: flex; }
-            .hamburger { display: flex; }
-        }
-
-        /* HERO SECTION WITH CLEAN YOUTUBE BACKGROUND */
-        .hero {
-            position: relative; height: 100vh; width: 100vw;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden; text-align: center; z-index: 1;
-        }
-        .hero-video-wrapper {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100vw; height: 56.25vw;
-            min-height: 100vh; min-width: 177.77vh;
-            z-index: -2; pointer-events: none; /* Disables clicking on video */
-        }
-        .hero-video-wrapper iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; transform: scale(1.3); /* Hides YT branding & controls */
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(5,5,5,1) 100%);
-            z-index: -1;
-        }
+        .hamburger span { width: 25px; height: 2px; background: white; }
         
-        .hero-content { z-index: 10; max-width: 800px; padding: 20px; }
-        .hero-content h1 { font-size: 5vw; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.2rem; color: #bbb; margin-bottom: 30px; }
-
-        /* SOUND ENABLE BUTTON (Apple Style) */
-        .btn-glass {
-            padding: 12px 30px; border-radius: 30px; border: 1px solid var(--glass-border);
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            color: white; font-size: 16px; cursor: pointer; transition: 0.3s;
-            box-shadow: var(--glow); margin-bottom: 10px;
-        }
-        .btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
-
-        /* SECTIONS & GRIDS */
+        /* Hero */
+        .hero { position: relative; height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
+        .hero-video-wrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; z-index: -2; pointer-events: none; }
+        .hero-video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transform: scale(1.3); }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(5,5,5,1)); z-index: -1; }
+        .hero-content { z-index: 10; padding: 20px; }
+        .hero-content h1 { font-size: 5vw; font-weight: 800; margin-bottom: 20px; }
+        .btn-glass { padding: 12px 30px; border-radius: 30px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white; cursor: pointer; transition: 0.3s; }
+        
+        /* Grids & Cards */
         .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
         .section-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; text-align: center; }
+        .grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        .video-card { border-radius: 20px; overflow: hidden; background: var(--glass-bg); border: 1px solid var(--glass-border); }
+        .ratio-16-9 iframe { aspect-ratio: 16/9; width: 100%; border: none; }
+        .ratio-9-16 iframe { aspect-ratio: 9/16; width: 100%; border: none; }
         
-        .grid { display: grid; gap: 30px; }
-        .grid-long { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-        .grid-shorts { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-        
-        .video-card {
-            border-radius: 20px; overflow: hidden; position: relative;
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            transition: 0.4s ease;
-        }
-        .video-card:hover { transform: translateY(-10px); box-shadow: var(--glow); border-color: rgba(255,255,255,0.4); }
-        .video-card iframe { width: 100%; border: none; }
-        
-        /* 16:9 and 9:16 AR */
-        .ratio-16-9 iframe { aspect-ratio: 16/9; }
-        .ratio-9-16 iframe { aspect-ratio: 9/16; }
-
-        /* SKILLS & SOCIALS */
+        /* Socials & Skills */
+        .socials { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .socials a, .socials button { padding: 15px 25px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white; text-decoration: none; cursor: pointer; }
         .skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-        .skill-tag {
-            padding: 10px 20px; border-radius: 30px;
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px); color: #ddd; font-weight: 500;
-        }
+        .skill-tag { padding: 10px 20px; border-radius: 30px; background: var(--glass-bg); border: 1px solid var(--glass-border); }
         
-        .socials { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .socials a, .socials button {
-            text-decoration: none; color: white; background: rgba(255,255,255,0.05);
-            padding: 15px 30px; border-radius: 12px; border: 1px solid var(--glass-border);
-            transition: 0.3s; cursor: pointer; font-size: 16px;
-        }
-        .socials a:hover, .socials button:hover { background: rgba(255,255,255,0.2); }
-
-        /* EMAIL COPY TOAST */
-        #toast {
-            visibility: hidden; min-width: 250px; background-color: rgba(255,255,255,0.9);
-            color: #000; text-align: center; border-radius: 10px; padding: 16px;
-            position: fixed; z-index: 10000; left: 50%; bottom: 30px;
-            transform: translateX(-50%); font-weight: 600; font-size: 15px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-            opacity: 0; transition: opacity 0.5s, visibility 0.5s;
-        }
-        #toast.show { visibility: visible; opacity: 1; }
-
-        /* HIDDEN BG MUSIC PLAYER */
-        #bg-music-player { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; z-index: -100; }
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--glass-border); margin-top: 50px; color: #777;}
+        #toast { visibility: hidden; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 16px; border-radius: 10px; z-index: 10000; }
+        #toast.show { visibility: visible; }
+        
+        @media (max-width: 768px) { .nav-links { display: none; position: absolute; top: 60px; right: 0; background: var(--glass-bg); width: 100%; flex-direction: column; text-align: center; padding: 20px 0; } .nav-links.active { display: flex; } .hamburger { display: flex; } }
     </style>
 </head>
 <body>
-
-    <!-- Hidden Background Audio Player (20% Volume) -->
     <div id="bg-music-player"></div>
-
-    <!-- Navigation -->
     <nav>
         <div class="logo">ZEESHAN.</div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
+        <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></div>
         <div class="nav-links" id="navLinks">
-            <a href="#hero" onclick="toggleMenu()">Home</a>
-            <a href="#long-form" onclick="toggleMenu()">Long Form</a>
-            <a href="#shorts" onclick="toggleMenu()">Shorts / Reels</a>
-            <a href="#workflow" onclick="toggleMenu()">Workflow</a>
-            <a href="#contact" onclick="toggleMenu()">Contact</a>
+            <a href="#hero">Home</a><a href="#long-form">Long Form</a><a href="#shorts">Shorts</a><a href="#workflow">Skills</a><a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="hero-video-wrapper">
-            <div id="hero-yt-player"></div>
-        </div>
+        <div class="hero-video-wrapper"><div id="hero-yt-player"></div></div>
         <div class="hero-overlay"></div>
-        
         <div class="hero-content">
             <h1>Crafting Cinematic Stories.</h1>
-            <p>Advanced Video Editing | Retention Optimization | 50M+ Views Strategy</p>
-            
             <button class="btn-glass" id="sound-toggle" onclick="enableSound()">Tap to Enable Smart Audio 🔊</button>
-            <div id="sound-status" style="font-size: 13px; color: #22c55e; margin-top: 10px; transition: 0.5s; opacity: 0;">Audio Active</div>
         </div>
     </section>
 
-    <!-- 16:9 Long Form Videos -->
     <section class="section" id="long-form">
         <h2 class="section-title">Long-Form Masterpieces</h2>
-        <div class="grid grid-long">
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/IpR9RoSTvfY?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/uhm1k1WJNmA?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/OK2lzEEKdas?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KIvWwlHQDQQ?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ptol3pxJsIc?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/emsCSTgWgM4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+        <div class="grid">
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/IpR9RoSTvfY?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/uhm1k1WJNmA?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/OK2lzEEKdas?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KIvWwlHQDQQ?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ptol3pxJsIc?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-16-9"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/emsCSTgWgM4?enablejsapi=1"></iframe></div>
         </div>
     </section>
 
-    <!-- 9:16 Shorts / Reels -->
     <section class="section" id="shorts">
         <h2 class="section-title">High-Retention Shorts</h2>
-        <div class="grid grid-shorts">
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/cWjZTDX6G_s?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/mQFSpqt5Pm4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ekXVqUo0lh4?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KKeugeOYPMY?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/yVKvA52bPhw?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
-            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/45EvIlnrlJ0?enablejsapi=1&rel=0" allowfullscreen></iframe></div>
+        <div class="grid">
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/cWjZTDX6G_s?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/mQFSpqt5Pm4?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/ekXVqUo0lh4?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/KKeugeOYPMY?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/yVKvA52bPhw?enablejsapi=1"></iframe></div>
+            <div class="video-card ratio-9-16"><iframe class="portfolio-iframe" src="https://www.youtube.com/embed/45EvIlnrlJ0?enablejsapi=1"></iframe></div>
         </div>
     </section>
 
-    <!-- Workflow & Skills -->
-    <section class="section" id="workflow">
-        <h2 class="section-title">Software & Skills</h2>
-        <div class="skills-container">
-            <div class="skill-tag">DaVinci Resolve Studio</div>
-            <div class="skill-tag">Fusion & Keyframes</div>
-            <div class="skill-tag">ElevenLabs AI</div>
-            <div class="skill-tag">Color Grading</div>
-            <div class="skill-tag">Sound Design</div>
-            <div class="skill-tag">Dark Psychology Hooks</div>
-            <div class="skill-tag">YouTube SEO</div>
-        </div>
-    </section>
-
-    <!-- Socials & Contact -->
     <section class="section" id="contact">
         <h2 class="section-title">Let's Work Together</h2>
         <div class="socials">
-            <!-- REPLACE WITH YOUR ACTUAL LINKS -->
-            <a href="#" target="_blank">Instagram</a>
-            <a href="#" target="_blank">YouTube</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="#" target="_blank">Discord</a>
-            <a href="#" target="_blank">WhatsApp</a>
+            <a href="https://www.instagram.com/diffinityx/" target="_blank">Instagram</a>
+            <a href="https://t.me/Zeeshanlone777" target="_blank">Telegram</a>
+            <a href="https://discord.com/users/1472509376194412720" target="_blank">Discord</a>
             <button onclick="copyEmail()">Copy Email ✉️</button>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Zeeshan. All rights reserved.</p>
-    </footer>
+    <div id="toast">✅ Email Copied!</div>
 
-    <!-- Email Copy Toast Notification -->
-    <div id="toast">✅ Email Copied to Clipboard!</div>
-
-    <!-- MAIN JAVASCRIPT: UI & YOUTUBE API LOGIC -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // 1. Mobile Menu Toggle
-        function toggleMenu() {
-            if (window.innerWidth <= 768) {
-                document.getElementById("navLinks").classList.toggle("active");
-            }
-        }
-
-        // 2. Email Copy to Clipboard Toast
-        function copyEmail() {
-            const myEmail = "your.email@example.com"; // <--- APNI EMAIL YAHAN DAALO
-            navigator.clipboard.writeText(myEmail).then(() => {
-                let toast = document.getElementById("toast");
-                toast.classList.add("show");
-                setTimeout(() => { toast.classList.remove("show"); }, 3000);
-            });
-        }
-
-        // ==========================================
-        // 3. YOUTUBE SMART AUDIO ENGINE LOGIC
-        // ==========================================
-        var heroPlayer;
-        var bgMusicPlayer;
-        var portfolioPlayers = [];
-        var isSoundEnabledByUser = false;
-        var activePortfolioVideos = 0;
-
-        // Load YouTube IFrame API asynchronous
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var heroPlayer, bgMusicPlayer, portfolioPlayers = [], isSoundEnabled = false, activeVideos = 0;
 
         function onYouTubeIframeAPIReady() {
-            // A. Hero Loop Player (Volume 100)
-            heroPlayer = new YT.Player('hero-yt-player', {
-                videoId: '5qw1yNk6Q1k',
-                playerVars: {
-                    'autoplay': 1, 'controls': 0, 'showinfo': 0, 'rel': 0,
-                    'mute': 1, 'loop': 1, 'playlist': '5qw1yNk6Q1k',
-                    'playsinline': 1, 'enablejsapi': 1, 'modestbranding': 1, 'disablekb': 1
-                },
-                events: {
-                    'onReady': function(e) { e.target.setVolume(100); e.target.playVideo(); }
-                }
-            });
-
-            // B. Background Music Player (Volume 20)
-            bgMusicPlayer = new YT.Player('bg-music-player', {
-                videoId: 'nZOrhNlbFHc',
-                playerVars: {
-                    'autoplay': 1, 'controls': 0, 'rel': 0, 'showinfo': 0,
-                    'loop': 1, 'playlist': 'nZOrhNlbFHc',
-                    'playsinline': 1, 'enablejsapi': 1
-                },
-                events: {
-                    'onReady': function(e) {
-                        e.target.setVolume(20);
-                        e.target.mute(); // Kept muted till user clicks "Enable Audio"
-                        e.target.playVideo();
-                    }
-                }
-            });
-
-            // C. Setup Tracking for All Portfolio Videos
-            var iframes = document.querySelectorAll('.portfolio-iframe');
-            iframes.forEach(function(iframe) {
-                var pPlayer = new YT.Player(iframe, {
-                    events: { 'onStateChange': onPortfolioStateChange }
-                });
-                portfolioPlayers.push(pPlayer);
-                portfolioObserver.observe(iframe); // Observe for scrolling away
-            });
+            heroPlayer = new YT.Player('hero-yt-player', { videoId: '5qw1yNk6Q1k', playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: '5qw1yNk6Q1k', enablejsapi: 1 }, events: { onReady: e => e.target.playVideo() } });
+            bgMusicPlayer = new YT.Player('bg-music-player', { videoId: 'nZOrhNlbFHc', playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: 'nZOrhNlbFHc', enablejsapi: 1 }, events: { onReady: e => { e.target.setVolume(20); e.target.mute(); e.target.playVideo(); } } });
+            document.querySelectorAll('.portfolio-iframe').forEach(i => portfolioPlayers.push(new YT.Player(i, { events: { onStateChange: onPortfolioStateChange } })));
         }
 
-        // User Clicks Button to Enable Master Audio
         function enableSound() {
-            isSoundEnabledByUser = true;
+            isSoundEnabled = true;
             if(heroPlayer) heroPlayer.unMute();
             if(bgMusicPlayer) bgMusicPlayer.unMute();
-
             document.getElementById('sound-toggle').style.display = 'none';
-            let status = document.getElementById('sound-status');
-            status.style.opacity = '1';
-            setTimeout(() => { status.style.opacity = '0'; }, 3000);
         }
 
-        // Logic: Pause BG Music when ANY Portfolio Video is PLAYING
-        function onPortfolioStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING) {
-                activePortfolioVideos++;
-                if (bgMusicPlayer && typeof bgMusicPlayer.pauseVideo === 'function') bgMusicPlayer.pauseVideo();
-                if (heroPlayer && typeof heroPlayer.mute === 'function') heroPlayer.mute();
-            } 
-            else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                activePortfolioVideos = Math.max(0, activePortfolioVideos - 1);
-                
-                // If NO portfolio videos are playing, resume BG Music
-                if (activePortfolioVideos === 0 && isSoundEnabledByUser) {
-                    if (bgMusicPlayer && typeof bgMusicPlayer.playVideo === 'function') bgMusicPlayer.playVideo();
-                }
-            }
+        function onPortfolioStateChange(e) {
+            if (e.data === 1) { activeVideos++; if(bgMusicPlayer) bgMusicPlayer.pauseVideo(); if(heroPlayer) heroPlayer.mute(); }
+            else if (e.data === 2 || e.data === 0) { activeVideos = Math.max(0, activeVideos - 1); if(activeVideos === 0 && isSoundEnabled && bgMusicPlayer) bgMusicPlayer.playVideo(); }
         }
 
-        // Logic: Auto-pause portfolio videos if user scrolls past them
-        const portfolioObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    let iframe = entry.target;
-                    let player = portfolioPlayers.find(p => p.getIframe() === iframe);
-                    if (player && typeof player.pauseVideo === 'function' && typeof player.getPlayerState === 'function') {
-                        if(player.getPlayerState() === YT.PlayerState.PLAYING) {
-                            player.pauseVideo(); // This triggers onPortfolioStateChange & resumes BG music automatically!
-                        }
-                    }
-                }
+        function copyEmail() {
+            navigator.clipboard.writeText("YOUR_EMAIL@EXAMPLE.COM").then(() => {
+                let t = document.getElementById("toast"); t.classList.add("show");
+                setTimeout(() => t.classList.remove("show"), 3000);
             });
-        }, { threshold: 0.1 });
-
-        // Logic: Mute Hero Video audio when scrolled away from Hero section
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!heroPlayer || typeof heroPlayer.mute !== 'function') return;
-                
-                if (entry.isIntersecting) {
-                    // Scrolled back up to hero
-                    if (isSoundEnabledByUser && activePortfolioVideos === 0) {
-                        heroPlayer.unMute();
-                    }
-                } else {
-                    // Scrolled down away from hero
-                    heroPlayer.mute();
-                }
-            });
-        }, { threshold: 0.3 }); // Mutes when 70% of hero is out of screen
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const heroSection = document.getElementById('hero');
-            if(heroSection) heroObserver.observe(heroSection);
-        });
+        }
     </script>
 </body>
 </html>
