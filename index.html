@@ -449,7 +449,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (AUTOPLAY BACKGROUND VIDEO) -->
+    <!-- HERO SECTION (AUTOPLAY BACKGROUND VIDEO REPLACED WITH ryeqLUD0sqM) -->
     <section id="hero">
         <div id="hero-yt-player"></div>
         <div class="overlay"></div>
@@ -494,17 +494,17 @@
                 <h3>Secure Workflow</h3>
                 <p>Milestone payments, organized asset delivery via Google Drive, and Discord communications.</p>
             </div>
-            <!-- ADDED CARD 5: AI INTEGRATION -->
+            <!-- CARD 5: AI INTEGRATION -->
             <div class="card glow-card reveal">
                 <div class="card-icon">🤖</div>
-                <h3>Advanced AI Integration</h3>
-                <p>We leverage cutting-edge AI tools (ElevenLabs, Claude, Midjourney & AI plugins) for rapid asset creation, voice design, and best high-retention output.</p>
+                <h3>AI-Powered Execution</h3>
+                <p>We leverage cutting-edge AI tools like ElevenLabs, Claude, Nano Banana Pro & Midjourney for ultra-fast workflows and high-retention outputs.</p>
             </div>
-            <!-- ADDED CARD 6: UNCOMPROMISED TOOL SUITE ACCESS -->
+            <!-- CARD 6: UNCOMPROMISED TOOL ACCESS -->
             <div class="card glow-card reveal">
                 <div class="card-icon">🛠️</div>
-                <h3>Uncompromised Tool Access</h3>
-                <p>We have full premium access to major industry tools, stock libraries, and hardware—ensuring zero compromises on final video production quality.</p>
+                <h3>Premium Tool Ecosystem</h3>
+                <p>We have full access to industry-grade tools, stock libraries, and high-end hardware—ensuring zero compromises on video production quality.</p>
             </div>
         </div>
     </section>
@@ -527,7 +527,7 @@
         </div>
     </section>
 
-    <!-- LONG-FORM PORTFOLIO (EXACTLY 6 VIDEOS) -->
+    <!-- LONG-FORM PORTFOLIO (6 VIDEOS) -->
     <section class="section" id="portfolio">
         <div class="section-header reveal">
             <h2>Long-Form Portfolio</h2>
@@ -543,7 +543,7 @@
         </div>
     </section>
 
-    <!-- SHORTS PORTFOLIO (EXACTLY 6 VERTICAL SHORTS) -->
+    <!-- SHORTS PORTFOLIO (6 VERTICAL SHORTS) -->
     <section class="section" id="shorts" style="padding-top: 0;">
         <div class="section-header reveal">
             <h2>Vertical Shorts & Reels</h2>
@@ -708,7 +708,7 @@
     <!-- TOAST NOTIFICATION -->
     <div id="toast">Email Copied: lonezeeshan9682@gmail.com</div>
 
-    <!-- YOUTUBE IFRAME API & JS ENGINE -->
+    <!-- YOUTUBE IFRAME API & ADVANCED AUDIO LOGIC -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let heroPlayer, bgAudio, portfolioPlayers = [];
@@ -717,10 +717,10 @@
 
         // --- YOUTUBE ENGINE INIT ---
         function onYouTubeIframeAPIReady() {
-            // HERO BACKGROUND VIDEO (REPLACED WITH td9EVIJysYw)
+            // HERO BACKGROUND VIDEO (REPLACED WITH ryeqLUD0sqM)
             heroPlayer = new YT.Player('hero-yt-player', {
-                videoId: 'td9EVIJysYw',
-                playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: 'td9EVIJysYw' },
+                videoId: 'ryeqLUD0sqM',
+                playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: 'ryeqLUD0sqM' },
                 events: { onReady: onHeroReady }
             });
 
@@ -744,7 +744,7 @@
             heroPlayer.playVideo();
         }
 
-        // UNLOCK SOUND ON FIRST USER ACTION
+        // UNLOCK AUDIO ON FIRST USER INTERACTION
         function unlockSound() {
             if (userUnlocked) return;
             userUnlocked = true;
@@ -756,25 +756,47 @@
             document.addEventListener(evt, unlockSound, { once: true });
         });
 
-        // AUTO PAUSE / PLAY AUDIO CONTROL ENGINE
+        // HELPER: CHECK IF ANY PORTFOLIO VIDEO IS CURRENTLY PLAYING
+        function checkIsAnyPortfolioVideoPlaying() {
+            return portfolioPlayers.some(player => {
+                try {
+                    return player.getPlayerState() === YT.PlayerState.PLAYING;
+                } catch(e) {
+                    return false;
+                }
+            });
+        }
+
+        // SMART AUDIO ENGINE: IF ANY VIDEO IS PLAYING, BG MUSIC MUST STAY PAUSED
         function onPortfolioChange(e) {
-            if (e.data === 1) { // Video Playing
-                bgAudio.pauseVideo();
-                heroPlayer.mute();
-            } else if (e.data === 2 || e.data === 0) { // Video Paused or Ended
-                bgAudio.playVideo();
+            const isPlaying = checkIsAnyPortfolioVideoPlaying();
+
+            if (isPlaying) {
+                // Video chal rahi hai -> BG music pause rahega aur hero mute rahega
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
+                if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
+            } else {
+                // Koi video nahi chal rahi -> normal audio rules apply honge
                 updateAudioContext();
             }
         }
 
         function updateAudioContext() {
+            // Agar koi portfolio video chal rahi hai to scroll karne par bhi BG music bilkul NAHI chalega
+            if (checkIsAnyPortfolioVideoPlaying()) {
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
+                return;
+            }
+
             const heroRect = document.getElementById('hero').getBoundingClientRect();
             if (heroRect.bottom < 0) {
-                heroPlayer.mute();
-                bgAudio.playVideo();
+                // Hero section ke bahar aur koi video nahi chal rahi -> BG music chalega
+                if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
+                if (userUnlocked && bgAudio && bgAudio.playVideo) bgAudio.playVideo();
             } else if (userUnlocked) {
-                heroPlayer.unMute();
-                bgAudio.pauseVideo();
+                // Hero section me -> Hero video ki audio chalegi, BG music pause rahega
+                if (heroPlayer && heroPlayer.unMute) heroPlayer.unMute();
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
             }
         }
 
