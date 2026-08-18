@@ -1,760 +1,1643 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta name="google-site-verification" content="MFSur067GRZndwJ-PTQzigG3HkQ_6qdSnqudT0U3j9U" />
+
     <!-- PROTECTION: Block Right Click & Text Selection -->
+
     <style>
+
         body {
+
             -webkit-user-select: none; /* Chrome, Safari, Opera */
+
             -moz-user-select: none;    /* Firefox */
+
             -ms-user-select: none;     /* Internet Explorer/Edge */
+
             user-select: none;
+
         }
+
     </style>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ZEESHAN | High-Retention & Motion Graphics Editor</title>
+
     <style>
+
         :root { 
+
             --bg: #050505; 
+
             --glass: rgba(255, 255, 255, 0.03); 
+
             --glass-hover: rgba(255, 255, 255, 0.07);
+
             --border: rgba(255, 255, 255, 0.1); 
+
             --border-glow: rgba(99, 102, 241, 0.4);
+
             --accent: #6366f1; 
+
             --accent-glow: #4f46e5;
+
             --text: #ffffff; 
+
             --text-muted: #a1a1aa;
+
         }
+
+
 
         * { 
+
             margin: 0; 
+
             padding: 0; 
+
             box-sizing: border-box; 
+
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; 
+
             cursor: none; /* Custom Cursor Enabled */
+
         }
+
+
 
         body { 
+
             background-color: var(--bg); 
+
             color: var(--text); 
+
             overflow-x: hidden; 
+
             scroll-behavior: smooth; 
+
         }
+
+
 
         /* --- CUSTOM GLOWING CURSOR --- */
+
         #cursor-dot {
+
             width: 8px;
+
             height: 8px;
+
             background-color: var(--accent);
+
             border-radius: 50%;
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             pointer-events: none;
+
             z-index: 9999;
+
             transform: translate(-50%, -50%);
+
             transition: width 0.2s, height 0.2s, background-color 0.2s;
+
         }
+
+
 
         #cursor-outline {
+
             width: 36px;
+
             height: 36px;
+
             border: 1px solid rgba(99, 102, 241, 0.5);
+
             border-radius: 50%;
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             pointer-events: none;
+
             z-index: 9998;
+
             transform: translate(-50%, -50%);
+
             transition: transform 0.15s ease-out;
+
         }
+
+
 
         /* --- SMOOTH SCROLL REVEAL ANIMATION --- */
+
         .reveal {
+
             opacity: 0;
+
             transform: translateY(40px);
+
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
         }
+
+
 
         .reveal.active {
+
             opacity: 1;
+
             transform: translateY(0);
+
         }
+
+
 
         /* --- GLOW CARD --- */
+
         .glow-card { 
+
             transition: all 0.4s ease; 
+
             border: 1px solid var(--border); 
+
             background: var(--glass); 
+
             backdrop-filter: blur(20px); 
+
             border-radius: 24px;
+
         }
+
+
 
         .glow-card:hover { 
+
             border-color: var(--border-glow); 
+
             box-shadow: 0 0 35px rgba(99, 102, 241, 0.15); 
+
             background: var(--glass-hover);
+
             transform: translateY(-4px);
+
         }
+
+
 
         /* --- NAVBAR --- */
+
         nav { 
+
             position: fixed; 
+
             top: 0; 
+
             width: 100%; 
+
             z-index: 1000; 
+
             padding: 22px 8%; 
+
             display: flex; 
+
             justify-content: space-between; 
+
             align-items: center;
+
             backdrop-filter: blur(25px); 
+
             border-bottom: 1px solid var(--border);
+
             background: rgba(5, 5, 5, 0.7);
+
         }
+
+
 
         .logo { 
+
             font-weight: 800; 
+
             font-size: 1.3rem; 
+
             letter-spacing: -0.02em;
+
             color: var(--text);
+
         }
+
+
 
         .nav-links { 
+
             display: flex; 
+
             gap: 35px; 
+
             align-items: center;
+
         }
+
+
 
         .nav-links a { 
+
             color: var(--text-muted); 
+
             text-decoration: none; 
+
             font-size: 0.9rem; 
+
             font-weight: 500;
+
             transition: 0.3s ease; 
+
         }
+
+
 
         .nav-links a:hover { 
+
             color: #fff; 
+
         }
+
+
 
         .btn-cta {
+
             background: var(--accent);
+
             color: #fff !important;
+
             padding: 10px 22px;
+
             border-radius: 50px;
+
             font-weight: 600 !important;
+
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+
             transition: all 0.3s ease;
+
         }
+
+
 
         .btn-cta:hover {
+
             background: var(--accent-glow);
+
             box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
+
         }
+
+
 
         /* --- HERO SECTION --- */
+
         #hero { 
+
             height: 100vh; 
+
             width: 100%; 
+
             display: flex; 
+
             align-items: center; 
+
             justify-content: center; 
+
             position: relative; 
+
             overflow: hidden; 
+
         }
+
+
 
         #hero-yt-player {
+
             position: absolute;
+
             top: 50%;
+
             left: 50%;
+
             width: 100vw;
+
             height: 56.25vw;
+
             min-height: 100vh;
+
             min-width: 177.78vh;
+
             transform: translate(-50%, -50%);
+
             pointer-events: none;
+
             z-index: 0;
+
         }
+
+
 
         .overlay { 
+
             position: absolute; 
+
             width: 100%; 
+
             height: 100%; 
+
             background: radial-gradient(circle at center, rgba(5, 5, 5, 0.4) 0%, #050505 90%); 
+
             z-index: 1;
+
         }
+
+
 
         .hero-content { 
+
             text-align: center; 
+
             z-index: 2; 
+
             max-width: 850px;
+
             padding: 0 20px;
+
         }
+
+
 
         .hero-badge {
+
             display: inline-block;
+
             background: rgba(255, 255, 255, 0.05);
+
             border: 1px solid var(--border);
+
             padding: 8px 18px;
+
             border-radius: 50px;
+
             font-size: 0.85rem;
+
             color: #a5b4fc;
+
             margin-bottom: 20px;
+
             backdrop-filter: blur(10px);
+
         }
+
+
 
         .hero-content h1 {
+
             font-size: clamp(2.5rem, 5vw, 4.5rem);
+
             font-weight: 800;
+
             line-height: 1.1;
+
             margin-bottom: 20px;
+
             letter-spacing: -0.03em;
+
         }
+
+
 
         .hero-content h1 span {
+
             background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+
             -webkit-background-clip: text;
+
             -webkit-text-fill-color: transparent;
+
         }
+
+
 
         .hero-content p {
+
             color: var(--text-muted);
+
             font-size: 1.15rem;
+
             margin-bottom: 35px;
+
             line-height: 1.6;
+
         }
+
+
 
         /* --- SECTIONS --- */
+
         .section { 
+
             padding: 110px 8%; 
+
             max-width: 1300px;
+
             margin: 0 auto;
+
         }
+
+
 
         .section-header {
+
             text-align: center;
+
             margin-bottom: 60px;
+
         }
+
+
 
         h2 { 
+
             font-size: 2.8rem; 
+
             font-weight: 800;
+
             letter-spacing: -0.02em;
+
             margin-bottom: 12px;
+
         }
+
+
 
         .subtitle {
+
             color: var(--text-muted);
+
             font-size: 1.05rem;
+
         }
+
+
 
         .grid { 
+
             display: grid; 
+
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+
             gap: 25px; 
+
         }
+
+
 
         .card { 
+
             padding: 35px; 
+
         }
+
+
 
         .card-icon {
+
             font-size: 2rem;
+
             margin-bottom: 15px;
+
         }
+
+
 
         h3 { 
+
             font-size: 1.3rem;
+
             margin-bottom: 12px; 
+
             font-weight: 700;
+
         }
+
+
 
         p { 
+
             color: var(--text-muted); 
+
             line-height: 1.6; 
+
             font-size: 0.95rem;
+
         }
+
+
 
         /* --- PORTFOLIO MEDIA BOXES --- */
+
         .video-box { 
+
             aspect-ratio: 16/9; 
+
             width: 100%; 
+
             border-radius: 20px; 
+
             overflow: hidden; 
+
             position: relative;
+
         }
+
+
 
         .shorts-box { 
+
             aspect-ratio: 9/16; 
+
             width: 100%;
+
             max-width: 340px;
+
             margin: 0 auto;
+
         }
+
+
 
         .vid {
+
             width: 100%;
+
             height: 100%;
+
         }
+
+
 
         iframe { 
+
             width: 100%; 
+
             height: 100%; 
+
             border: none; 
+
         }
+
+
 
         /* --- REVIEWS SECTION --- */
+
         .reviews-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
             gap: 25px;
+
         }
+
+
 
         .review-card {
+
             padding: 30px;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
+
         }
+
+
 
         .client-header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 15px;
+
         }
+
+
 
         .client-name {
+
             font-weight: 700;
+
             font-size: 1.1rem;
+
             color: #fff;
+
         }
+
+
 
         .client-sub {
+
             font-size: 0.8rem;
+
             color: var(--accent);
+
             font-weight: 600;
+
         }
+
+
 
         .stars {
+
             color: #f59e0b;
+
             font-size: 0.9rem;
+
         }
+
+
 
         /* --- PRICING SECTION --- */
+
         .pricing-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
             gap: 25px;
+
         }
+
+
 
         .price-card {
+
             padding: 40px;
+
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
+
             position: relative;
+
         }
+
+
 
         .price-card.popular {
+
             border-color: var(--accent);
+
             background: rgba(99, 102, 241, 0.05);
+
         }
+
+
 
         .tag-popular {
+
             position: absolute;
+
             top: -12px;
+
             right: 25px;
+
             background: var(--accent);
+
             color: #fff;
+
             padding: 4px 14px;
+
             border-radius: 50px;
+
             font-size: 0.75rem;
+
             font-weight: 700;
+
             text-transform: uppercase;
+
         }
+
+
 
         .price-val {
+
             font-size: 2.2rem;
+
             font-weight: 800;
+
             margin: 15px 0 20px 0;
+
             color: #fff;
+
         }
+
+
 
         .price-features {
+
             list-style: none;
+
             margin-bottom: 30px;
+
         }
+
+
 
         .price-features li {
+
             color: var(--text-muted);
+
             font-size: 0.9rem;
+
             margin-bottom: 12px;
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
         }
+
+
 
         .price-features li::before {
+
             content: "✓";
+
             color: var(--accent);
+
             font-weight: 800;
+
         }
+
+
 
         /* --- CONTACT SECTION --- */
+
         .contact-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
             gap: 20px;
+
         }
+
+
 
         .contact-card {
+
             text-align: center;
+
             padding: 35px 20px;
+
             text-decoration: none;
+
             color: inherit;
+
         }
+
+
 
         /* --- TOAST NOTIFICATION --- */
+
         #toast { 
+
             position: fixed; 
+
             bottom: 30px; 
+
             left: 50%; 
+
             transform: translateX(-50%); 
+
             background: #fff; 
+
             color: #000; 
+
             padding: 14px 28px; 
+
             border-radius: 50px; 
+
             font-weight: 600;
+
             font-size: 0.9rem;
+
             display: none; 
+
             z-index: 2000; 
+
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
         }
+
+
 
         @media (max-width: 768px) {
+
             .nav-links { display: none; }
+
             .section { padding: 80px 5%; }
+
             .shorts-box { max-width: 100%; }
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <!-- CUSTOM CURSOR -->
+
     <div id="cursor-dot"></div>
+
     <div id="cursor-outline"></div>
 
+
+
     <!-- NAVBAR -->
+
     <nav>
+
         <div class="logo">ZEESHAN</div>
+
         <div class="nav-links">
+
             <a href="#about">Approach</a>
+
             <a href="#software">Tools</a>
+
             <a href="#portfolio">Portfolio</a>
+
             <a href="#reviews">Reviews</a>
+
             <a href="#pricing">Pricing</a>
+
             <a href="#contact" class="btn-cta">Let's Work</a>
+
         </div>
+
     </nav>
 
+
+
     <!-- HERO SECTION -->
+
     <section id="hero">
+
         <div id="hero-yt-player"></div>
+
         <div class="overlay"></div>
+
         <div class="hero-content reveal">
-            <div class="hero-badge">⚡ 2 Years of Expert High-Retention Editing & VFX Strategy</div>
+
+            <div class="hero-badge">⚡ High-Retention Video Editing & VFX Studio</div>
+
             <h1>Engineered For <span>Maximum Audience Retention</span></h1>
-            <p>Crafting sophisticated, psychology-backed narratives, utilizing advanced After Effects motion graphics & studio-grade DaVinci Resolve color pipelines.</p>
+
+            <p>Crafting story-driven, psychology-backed edits with After Effects motion graphics & DaVinci Resolve Studio color grading.</p>
+
             <div style="display: flex; gap: 15px; justify-content: center;">
-                <a href="#pricing" class="btn-cta" style="padding: 14px 32px; font-size: 0.95rem;">View Premium Pricing →</a>
-                <a href="#portfolio" class="glow-card" style="padding: 14px 32px; font-size: 0.95rem; text-decoration: none; color: #fff;">Explore Portfolio</a>
+
+                <a href="#pricing" class="btn-cta" style="padding: 14px 32px; font-size: 0.95rem;">View Pricing →</a>
+
+                <a href="#portfolio" class="glow-card" style="padding: 14px 32px; font-size: 0.95rem; text-decoration: none; color: #fff;">Watch Portfolio</a>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- HIDDEN BACKGROUND AUDIO CONTAINER -->
+
     <div id="bg-audio-container" style="display:none"></div>
 
+
+
     <!-- APPROACH -->
+
     <section class="section" id="about">
+
         <div class="section-header reveal">
-            <h2>The Elite Retention Framework</h2>
-            <p class="subtitle">Why industry-leading creators trust our premium editing methodology.</p>
+
+            <h2>The Retention Framework</h2>
+
+            <p class="subtitle">Why top YouTube creators trust our editing workflow.</p>
+
         </div>
+
         <div class="grid">
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">🧠</div>
-                <h3>Psychology-Driven Pacing</h3>
-                <p>Strategic pattern interrupts and precise sound design to command attention, resetting viewer focus every few seconds.</p>
+
+                <h3>Psychology Pacing</h3>
+
+                <p>Every cut, pattern interrupt, and sound drop is placed to reset viewer attention every 3-5 seconds.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">🎨</div>
-                <h3>Cinematic Color Science</h3>
-                <p>Sophisticated node-based color grading in DaVinci Resolve Studio for a premium, broadcast-quality aesthetic.</p>
+
+                <h3>Cinematic Color Grade</h3>
+
+                <p>Node-based color pipeline in DaVinci Resolve Studio for crisp, studio-grade aesthetic.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">⚡</div>
-                <h3>High-End Motion VFX</h3>
-                <p>Custom After Effects 2D/3D kinetic typography and dynamic visual hooks built to drive engagement.</p>
+
+                <h3>Custom Motion VFX</h3>
+
+                <p>After Effects 2D/3D typography hooks, custom lower thirds, and dynamic graphics.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">🛡️</div>
-                <h3>Narrative Flow Expertise</h3>
-                <p>Seamless structural editing that prioritizes a compelling story arch, ensuring viewers stay until the final frame.</p>
+
+                <h3>Secure Workflow</h3>
+
+                <p>Milestone payments, organized asset delivery via Google Drive, and Discord communications.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">🤖</div>
-                <h3>AI-Driven Pre-Production</h3>
-                <p>Cutting-edge utilization of ElevenLabs, LLMs, and Midjourney to optimize workflow and accelerate premium content delivery.</p>
+
+                <h3>AI-Powered Execution</h3>
+
+                <p>We leverage cutting-edge AI tools like ElevenLabs, Claude, Nano Banana Pro & Midjourney for ultra-fast workflows and high-retention outputs.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <div class="card-icon">🛠️</div>
-                <h3>Professional Studio Ecosystem</h3>
-                <p>Expert application of industry-standard tools, comprehensive asset libraries, and high-performance hardware for zero-compromise production.</p>
+
+                <h3>Premium Tool Ecosystem</h3>
+
+                <p>We have full access to industry-grade tools, stock libraries, and high-end hardware—ensuring zero compromises on video production quality.</p>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- SOFTWARE / TOOLS USED -->
+
     <section class="section" id="software" style="padding-top: 0;">
+
         <div class="section-header reveal">
-            <h2>Advanced Software Pipeline</h2>
-            <p class="subtitle">Industry-standard production suite utilized for every premium deliverable.</p>
+
+            <h2>Primary Software Stack</h2>
+
+            <p class="subtitle">Industry-leading production tools used for every export.</p>
+
         </div>
+
         <div class="grid">
+
             <div class="card glow-card reveal">
+
                 <h3>After Effects & Fusion</h3>
-                <p>Engineered for complex motion graphics, kinetic typography, 3D visual integration, and bespoke visual effects.</p>
+
+                <p>Used for complex motion graphics, kinetic typography, 3D element integration, visual effects, and customized hooks.</p>
+
             </div>
+
             <div class="card glow-card reveal">
+
                 <h3>DaVinci Resolve Studio</h3>
-                <p>Mastered for final timeline integration, immersive audio sound design, and professional, cinematic color grading.</p>
+
+                <p>Used for final timeline mastering, precise audio SFX sound design, multitrack mixing, and professional color grading.</p>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- LONG-FORM PORTFOLIO -->
+
     <section class="section" id="portfolio">
+
         <div class="section-header reveal">
-            <h2>Premium Long-Form Portfolio</h2>
-            <p class="subtitle">High-retention editing crafted to maximize audience watch time.</p>
+
+            <h2>Long-Form Portfolio</h2>
+
+            <p class="subtitle">High-retention editing built for long-form watch time.</p>
+
         </div>
+
         <div class="grid">
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="QYve3j6SyeE"></div></div>
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="Qif2s65nqAs"></div></div>
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="q_X5IJ1uCbw"></div></div>
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="SfF_M_Mo5Z0"></div></div>
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="uhm1k1WJNmA"></div></div>
+
             <div class="video-box glow-card reveal"><div class="vid" data-id="IpR9RoSTvfY"></div></div>
+
         </div>
+
     </section>
+
+
 
     <!-- SHORTS PORTFOLIO -->
+
     <section class="section" id="shorts" style="padding-top: 0;">
+
         <div class="section-header reveal">
-            <h2>Viral Vertical Shorts & Reels</h2>
-            <p class="subtitle">Fast-paced, hook-driven vertical content engineered for massive virality.</p>
+
+            <h2>Vertical Shorts & Reels</h2>
+
+            <p class="subtitle">Fast-paced, hook-heavy vertical edits designed to go viral.</p>
+
         </div>
+
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="45EvIlnrlJ0"></div></div>
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="mQFSpqt5Pm4"></div></div>
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="yVKvA52bPhw"></div></div>
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="cWjZTDX6G_s"></div></div>
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="3uAKa-uf6eA"></div></div>
+
             <div class="video-box shorts-box glow-card reveal"><div class="vid" data-id="td9EVIJysYw"></div></div>
+
         </div>
+
     </section>
+
+
 
     <!-- REVIEWS -->
+
     <section class="section" id="reviews">
+
         <div class="section-header reveal">
-            <h2>Client Success Testimonials</h2>
-            <p class="subtitle">Feedback from top-tier YouTube creators regarding our collaborative results.</p>
+
+            <h2>Client Testimonials</h2>
+
+            <p class="subtitle">Real feedback from top YouTube creators and channels.</p>
+
         </div>
+
         <div class="reviews-grid">
+
             <div class="review-card glow-card reveal">
+
                 <div>
+
                     <div class="client-header">
+
                         <div>
+
                             <div class="client-name">Thomas DeLauer</div>
+
                             <div class="client-sub">4.03M Subscribers</div>
+
                         </div>
+
                         <div class="stars">★★★★★</div>
+
                     </div>
+
                     <p>"Zeeshan's pacing and clean motion graphics brought a fresh, high-retention energy to our complex health & nutrition videos. Watch time clicked up instantly."</p>
+
                 </div>
+
             </div>
+
             <div class="review-card glow-card reveal">
+
                 <div>
+
                     <div class="client-header">
+
                         <div>
+
                             <div class="client-name">Maxora</div>
+
                             <div class="client-sub">21.5K Subscribers</div>
+
                         </div>
+
                         <div class="stars">★★★★★</div>
+
                     </div>
+
                     <p>"Insane After Effects visual hooks! The dark aesthetics and 2D/3D typography kept our self-improvement audience glued till the last frame."</p>
+
                 </div>
+
             </div>
+
             <div class="review-card glow-card reveal">
+
                 <div>
+
                     <div class="client-header">
+
                         <div>
+
                             <div class="client-name">Aesthetic VFX</div>
+
                             <div class="client-sub">24.2K Subscribers</div>
+
                         </div>
+
                         <div class="stars">★★★★★</div>
+
                     </div>
+
                     <p>"Sound design and color grading are next level. He takes raw commentary and elevates it into a cinema-style story."</p>
+
                 </div>
+
             </div>
+
             <div class="review-card glow-card reveal">
+
                 <div>
+
                     <div class="client-header">
+
                         <div>
+
                             <div class="client-name">Motion Mindset</div>
+
                             <div class="client-sub">19.8K Subscribers</div>
+
                         </div>
+
                         <div class="stars">★★★★★</div>
+
                     </div>
+
                     <p>"Working with Zeeshan was seamless. Super fast delivery, flawless DaVinci Resolve color polish, and crazy creative motion graphics."</p>
+
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- PRICING -->
+
     <section class="section" id="pricing">
+
         <div class="section-header reveal">
-            <h2>Premium Flexible Pricing Packages</h2>
-            <p class="subtitle">Tailored, high-value production options designed for channel growth.</p>
+
+            <h2>Flexible Pricing Packages</h2>
+
+            <p class="subtitle">Transparent options tailored to your channel scale.</p>
+
         </div>
+
         <div class="pricing-grid">
+
             <div class="price-card glow-card reveal">
+
                 <div>
+
                     <h3>Starter Pack</h3>
-                    <p>Single Premium Long-Form Video</p>
+
+                    <p>Single Long-Form Video</p>
+
                     <div class="price-val">$50 - $400</div>
+
                     <ul class="price-features">
-                        <li>Customized to complexity & length</li>
-                        <li>Mastered Sound SFX Design</li>
-                        <li>Advanced After Effects Graphics</li>
-                        <li>Professional Node Color Grade</li>
-                        <li>Optimized Delivery Timeline</li>
+
+                        <li>Depends on complexity & length</li>
+
+                        <li>DaVinci Resolve Sound SFX</li>
+
+                        <li>After Effects Motion Graphics</li>
+
+                        <li>DaVinci Node Color Grading</li>
+
+                        <li>Delivery time depends on scale</li>
+
                     </ul>
+
                 </div>
+
                 <a href="#contact" class="glow-card" style="padding: 12px; text-align: center; text-decoration: none; color: #fff; display: block;">Select Starter</a>
+
             </div>
+
             <div class="price-card glow-card popular reveal">
+
                 <div class="tag-popular">Most Popular</div>
+
                 <div>
+
                     <h3>Growth Retainer</h3>
-                    <p>Monthly Premium Channel Package</p>
+
+                    <p>Monthly Channel Package</p>
+
                     <div class="price-val">$500 <span style="font-size: 1rem; color: var(--text-muted);">/ month</span></div>
+
                     <ul class="price-features">
-                        <li>4 Premium Long-Form Videos / Month</li>
-                        <li>Full Immersive Audio Design</li>
-                        <li>Elite After Effects Motion Graphics</li>
-                        <li>Cinematic Node-Based Color Grade</li>
+
+                        <li>4 Long-Form Videos / Month</li>
+
+                        <li>Full Sound SFX & Audio Design</li>
+
+                        <li>Advanced After Effects Motion Graphics</li>
+
+                        <li>Cinema Color Grading</li>
+
                         <li>Priority Turnaround & Revision Support</li>
+
                     </ul>
+
                 </div>
+
                 <a href="#contact" class="btn-cta" style="padding: 12px; text-align: center; text-decoration: none; display: block;">Get Started Now</a>
+
             </div>
+
             <div class="price-card glow-card reveal">
+
                 <div>
+
                     <h3>Shorts / Reels Bundle</h3>
-                    <p>10 High-Engagement Vertical Edits</p>
+
+                    <p>10 Vertical Edits</p>
+
                     <div class="price-val">$350 <span style="font-size: 1rem; color: var(--text-muted);">/ pack</span></div>
+
                     <ul class="price-features">
-                        <li>10 Premium Vertical Edits</li>
-                        <li>Dynamic, High-Retention Captions</li>
-                        <li>Advanced Sound FX & Visual Hooks</li>
-                        <li>Rapid, Quality-Assured Turnaround</li>
-                        <li>Viral-Optimized Formats</li>
+
+                        <li>10 Vertical Short-Form Videos</li>
+
+                        <li>Dynamic Alex Hormozi Captions</li>
+
+                        <li>Sound Effects & Visual Hooks</li>
+
+                        <li>Fast Turnaround Delivery</li>
+
+                        <li>High-Engagement Formats</li>
+
                     </ul>
+
                 </div>
+
                 <a href="#contact" class="glow-card" style="padding: 12px; text-align: center; text-decoration: none; color: #fff; display: block;">Select Shorts Pack</a>
+
             </div>
+
         </div>
+
     </section>
+
+
 
     <!-- CONTACT -->
+
     <section class="section" id="contact">
+
         <div class="section-header reveal">
+
             <h2>Get In Touch</h2>
-            <p class="subtitle">Secure your production slot for your next high-impact project.</p>
+
+            <p class="subtitle">Let's discuss your next video project.</p>
+
         </div>
+
         <div class="contact-grid">
+
             <a href="https://wa.me/919682515246" target="_blank" class="contact-card glow-card reveal">
+
                 <div class="card-icon">💬</div>
+
                 <h3>WhatsApp</h3>
+
                 <p>+91 96825 15246</p>
+
             </a>
+
             <div class="contact-card glow-card reveal" onclick="copyEmail()" style="cursor: pointer;">
+
                 <div class="card-icon">✉️</div>
+
                 <h3>Email</h3>
+
                 <p>lonezeeshan9682@gmail.com</p>
+
             </div>
+
             <div class="contact-card glow-card reveal">
+
                 <div class="card-icon">👾</div>
+
                 <h3>Discord</h3>
+
                 <p>User ID: 1472509376194412720</p>
+
             </div>
+
         </div>
+
     </section>
 
+
+
     <!-- TOAST -->
+
     <div id="toast">Email Copied: lonezeeshan9682@gmail.com</div>
 
+
+
     <!-- PROTECTION SCRIPT & YOUTUBE ENGINE -->
+
     <script src="https://www.youtube.com/iframe_api"></script>
+
     <script>
+
         // --- PROTECTION: BLOCK INSPECT/VIEW SOURCE ---
+
         document.addEventListener('contextmenu', e => e.preventDefault());
+
         document.addEventListener('keydown', e => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+
+            if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
+
                 e.preventDefault();
+
             }
+
         });
 
-        // --- YOUTUBE PLAYER ENGINE ---
+
+
+        let heroPlayer, bgAudio, portfolioPlayers = [];
+
+        let isStarted = false;
+
+        let userUnlocked = false;
+
+
+
         function onYouTubeIframeAPIReady() {
-            document.querySelectorAll('.vid').forEach(el => {
-                new YT.Player(el, {
-                    videoId: el.dataset.id,
-                    playerVars: { 'autoplay': 0, 'controls': 1, 'rel': 0 },
-                });
+
+            heroPlayer = new YT.Player('hero-yt-player', {
+
+                videoId: 'ryeqLUD0sqM',
+
+                playerVars: { autoplay: 1, controls: 0, mute: 1, loop: 1, playlist: 'ryeqLUD0sqM' },
+
+                events: { onReady: onHeroReady }
+
             });
+
+            bgAudio = new YT.Player('bg-audio-container', {
+
+                videoId: 'nZOrhNlbFHc',
+
+                playerVars: { autoplay: 0, loop: 1, playlist: 'nZOrhNlbFHc' }
+
+            });
+
+            document.querySelectorAll('.vid').forEach(el => {
+
+                portfolioPlayers.push(new YT.Player(el, {
+
+                    videoId: el.getAttribute('data-id'),
+
+                    events: { onStateChange: onPortfolioChange }
+
+                }));
+
+            });
+
         }
 
-        // --- CUSTOM CURSOR FOLLOW ---
-        const dot = document.getElementById('cursor-dot');
-        const outline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', e => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
-            outline.style.left = e.clientX + 'px';
-            outline.style.top = e.clientY + 'px';
+
+
+        function onHeroReady() {
+
+            isStarted = true;
+
+            heroPlayer.playVideo();
+
+        }
+
+
+
+        function unlockSound() {
+
+            if (userUnlocked) return;
+
+            userUnlocked = true;
+
+            if (heroPlayer && heroPlayer.unMute) heroPlayer.unMute();
+
+            if (bgAudio && bgAudio.setVolume) bgAudio.setVolume(20);
+
+        }
+
+
+
+        ['click', 'scroll', 'keydown', 'touchstart'].forEach(evt => {
+
+            document.addEventListener(evt, unlockSound, { once: true });
+
         });
 
-        // --- SCROLL REVEAL ---
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
+
+
+        function checkIsAnyPortfolioVideoPlaying() {
+
+            return portfolioPlayers.some(player => {
+
+                try { return player.getPlayerState() === YT.PlayerState.PLAYING; } catch(e) { return false; }
+
             });
-        }, { threshold: 0.1 });
+
+        }
+
+
+
+        function onPortfolioChange(e) {
+
+            const isPlaying = checkIsAnyPortfolioVideoPlaying();
+
+            if (isPlaying) {
+
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
+
+                if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
+
+            } else {
+
+                updateAudioContext();
+
+            }
+
+        }
+
+
+
+        function updateAudioContext() {
+
+            if (checkIsAnyPortfolioVideoPlaying()) {
+
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
+
+                return;
+
+            }
+
+            const heroRect = document.getElementById('hero').getBoundingClientRect();
+
+            if (heroRect.bottom < 0) {
+
+                if (heroPlayer && heroPlayer.mute) heroPlayer.mute();
+
+                if (userUnlocked && bgAudio && bgAudio.playVideo) bgAudio.playVideo();
+
+            } else if (userUnlocked) {
+
+                if (heroPlayer && heroPlayer.unMute) heroPlayer.unMute();
+
+                if (bgAudio && bgAudio.pauseVideo) bgAudio.pauseVideo();
+
+            }
+
+        }
+
+
+
+        window.addEventListener('scroll', () => {
+
+            if (!isStarted) return;
+
+            updateAudioContext();
+
+        });
+
+
+
+        function copyEmail() {
+
+            navigator.clipboard.writeText("lonezeeshan9682@gmail.com");
+
+            const t = document.getElementById('toast');
+
+            t.style.display = 'block';
+
+            setTimeout(() => t.style.display = 'none', 3000);
+
+        }
+
+
+
+        const dot = document.getElementById('cursor-dot');
+
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+
+            const posX = e.clientX;
+
+            const posY = e.clientY;
+
+            dot.style.left = `${posX}px`;
+
+            dot.style.top = `${posY}px`;
+
+            outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 400, fill: "forwards" });
+
+        });
+
+
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) entry.target.classList.add('active');
+
+            });
+
+        }, { threshold: 0.15 });
+
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // --- COPY EMAIL ---
-        function copyEmail() {
-            navigator.clipboard.writeText('lonezeeshan9682@gmail.com');
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 3000);
-        }
     </script>
+
 </body>
+
 </html>
